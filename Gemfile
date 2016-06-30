@@ -1,2 +1,2 @@
 source "https://rubygems.org"
-gem "rulers"
+gem "rulers", "0.2.0"
