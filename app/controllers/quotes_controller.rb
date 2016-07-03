@@ -10,4 +10,10 @@ class QuotesController < Rulers::Controller
   def exception
     raise "It's a bad name"
   end
+
+  def test_rendering
+    @noun = "A BlendTec blendar"
+    @another_noun = "a mutton, lettuce and " + "tomato sandwich"
+    render :test_rendering
+  end
 end
