@@ -13,6 +13,17 @@ class QuotesController < Rulers::Controller
     render :quote, obj: quote_1
   end
 
+  def new_quote
+    attrs = {
+      "submitter" => "web user",
+      "quote" => "A piture is worth one k pixels",
+      "attribution" => "Me"
+    }
+
+    m = FileModel.create attrs
+    render :quote, obj: m
+  end
+
   def test_page
     "Test the rerun gem work or not ?"
   end
