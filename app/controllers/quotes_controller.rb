@@ -24,6 +24,25 @@ class QuotesController < Rulers::Controller
     render :quote, obj: m
   end
 
+  def update
+    raise "Only POST to this route!" unless env["REQUEST_METHOD"] == "POST"
+
+    body = env["rack.input"].read
+    astr = body.split("&")
+    params = {}
+
+    astr.each do |a|
+      name, val = a.split "="
+      params[name] = val
+    end
+
+    quote = FileModel.find(params["id"].to_i)
+    quote["submitter"] = params["submitter"]
+    quote.save
+
+    render :quote, obj: quote
+  end
+
   def test_page
     "Test the rerun gem work or not ?"
   end
