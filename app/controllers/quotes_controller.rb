@@ -24,6 +24,11 @@ class QuotesController < Rulers::Controller
     render :quote, obj: m
   end
 
+  def find_by_submitter
+    m = FileModel.method_missing("find_all_by_submitter", "Hexter")
+    render :quote, obj: m.first
+  end
+
   def update
     raise "Only POST to this route!" unless env["REQUEST_METHOD"] == "POST"
 
