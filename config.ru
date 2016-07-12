@@ -1,4 +1,6 @@
 require './config/application'
+require 'rack/google-analytics'
+require 'json'
 
 class BenchMarker
   def initialize(app, runs = 100)
@@ -26,5 +28,7 @@ OUTPUT
 end
 
 use BenchMarker, 10_000
+
+use Rack::GoogleAnalytics, :tracker => 'UA-30520713-5'
 
 run BestQuotes::Application.new
