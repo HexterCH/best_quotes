@@ -2,33 +2,8 @@ require './config/application'
 require 'rack/google-analytics'
 require 'json'
 
-class BenchMarker
-  def initialize(app, runs = 100)
-    @app, @runs = app, runs
-  end
-
-  def call(env)
-    t = Time.now
-
-    result = nil
-    @runs.times { result = @app.call(env) }
-
-    t2 = Time.now - t
-
-    STDERR.puts <<OUTPUT
-      Benchmark:
-        #{@runs} runs
-        #{@t2.to_f} seconds total
-        #{@t2.to_f * 1000.0 / @runs}
-      millisec/run
-OUTPUT
-
-    result
-  end
+map "/" do
+  run QuotesController.action(:index)
 end
-
-use BenchMarker, 10_000
-
-use Rack::GoogleAnalytics, :tracker => 'UA-30520713-5'
 
 run BestQuotes::Application.new
