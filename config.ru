@@ -5,7 +5,7 @@ require 'json'
 app = BestQuotes::Application.new
 
 app.route do
-  match "", "quotes#index"
+  root "quotes#index"
   match "sub-app", proc {
     [
       200,
@@ -14,10 +14,8 @@ app.route do
     ]
   }
 
-  # default routes
   match ":controller/:id/:action"
   match ":controller/:id", :default => { "action" => "show" }
-  match ":controller", :default => { "acion" => "index" }
 end
 
 run app
