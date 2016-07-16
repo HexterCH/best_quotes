@@ -14,7 +14,7 @@ app.route do
     ]
   }
 
-  match ":controller/:id/:action"
+  match ":controller/:id/:action.(:type)?"
   match ":controller/:id", :default => { "action" => "show" }
 end
 
